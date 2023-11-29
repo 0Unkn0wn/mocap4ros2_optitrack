@@ -1,5 +1,5 @@
 repositories:
   mocap_msgs:
     type: git
-    url: git@github.com:OptiTrack/mocap_msgs.git
+    url: https://github.com:OptiTrack/mocap_msgs.git
     version: master
