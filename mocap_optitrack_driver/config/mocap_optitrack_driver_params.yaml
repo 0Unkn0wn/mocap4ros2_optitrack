@@ -1,8 +1,8 @@
 mocap_optitrack_driver_node:
   ros__parameters:
     connection_type: "Unicast" # Unicast / Multicast
-    server_address: "192.168.112.1"
-    local_address: "192.168.121.116"
+    server_address: "192.168.0.102"
+    local_address: "172.17.0.1"
     multicast_address: "239.255.42.99"
     server_command_port: 1510
     server_data_port: 1511
@@ -23,6 +23,4 @@ mocap_optitrack_driver_node:
     rb_parent_frame_name: "optitrack"
     rigid_bodies:
       1:
-        name: "Rigid Body 002"
-      2:
-        name: "Rigid Body 001"
+        name: "Testing"
