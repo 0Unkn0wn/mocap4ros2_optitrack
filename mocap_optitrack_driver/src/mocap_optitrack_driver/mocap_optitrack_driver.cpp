@@ -219,7 +219,8 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
     }
     mocap_markers_pub_->publish(msg);
   }
-
+/*
+ //old version keep if i break something
   if (mocap_rigid_body_pub_->get_subscription_count() > 0) {
     mocap_msgs::msg::RigidBodies msg_rb;
     msg_rb.header.stamp = now() - frame_delay;
@@ -241,6 +242,27 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
 
       msg_rb.rigidbodies.push_back(rb);
     }
+
+    mocap_rigid_body_pub_->publish(msg_rb);
+  }
+
+  */
+
+  if (mocap_rigid_body_pub_->get_subscription_count() > 0) {
+    geometry_msgs::msg::TransformStamped msg_rb;
+    msg_rb.header.stamp = now() - frame_delay;
+    msg_rb.header.frame_id = "map";
+    msg_rb.frame_number = frame_number_;
+
+    msg_rb.rigid_body_name = std::to_string(data->RigidBodies[i].ID);
+    msg_rb.pose.position.x = data->RigidBodies.x;
+    msg_rb.pose.position.y = data->RigidBodies.y;
+    msg_rb.pose.position.z = data->RigidBodies.z;
+    msg_rb.pose.orientation.x = data->RigidBodies.qx;
+    msg_rb.pose.orientation.y = data->RigidBodies.qy;
+    msg_rb.pose.orientation.z = data->RigidBodies.qz;
+    msg_rb.pose.orientation.w = data->RigidBodies.qw;
+    msg_rb.markers = marker2rb[data->RigidBodies.ID];
 
     mocap_rigid_body_pub_->publish(msg_rb);
   }
