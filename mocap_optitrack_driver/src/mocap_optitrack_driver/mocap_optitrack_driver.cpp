@@ -244,7 +244,11 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
 
     mocap_rigid_body_pub_->publish(msg_rb);
   }
-
+  
+  if (publish_tf_ and activate_tf) {
+    publish_tf_data(data);
+  }
+}
 
 void OptitrackDriverNode::publish_tf_data(sFrameOfMocapData * data)
 {
