@@ -219,8 +219,7 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
     }
     mocap_markers_pub_->publish(msg);
   }
-/*
- //old version keep if i break something
+
   if (mocap_rigid_body_pub_->get_subscription_count() > 0) {
     mocap_msgs::msg::RigidBodies msg_rb;
     msg_rb.header.stamp = now() - frame_delay;
@@ -246,27 +245,6 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
     mocap_rigid_body_pub_->publish(msg_rb);
   }
 
-  */
-
-  if (mocap_rigid_body_pub_->get_subscription_count() > 0) {
-    geometry_msgs::msg::PoseStamped msg_rb;
-    msg_rb.header.stamp = now() - frame_delay;
-
-    msg_rb.pose.position.x = data->RigidBodies.x;
-    msg_rb.pose.position.y = data->RigidBodies.y;
-    msg_rb.pose.position.z = data->RigidBodies.z;
-    msg_rb.pose.orientation.x = data->RigidBodies.qx;
-    msg_rb.pose.orientation.y = data->RigidBodies.qy;
-    msg_rb.pose.orientation.z = data->RigidBodies.qz;
-    msg_rb.pose.orientation.w = data->RigidBodies.qw;
-
-    mocap_rigid_body_pub_->publish(msg_rb);
-  }
-  
-  if (publish_tf_ and activate_tf) {
-    publish_tf_data(data);
-  }
-}
 
 void OptitrackDriverNode::publish_tf_data(sFrameOfMocapData * data)
 {
