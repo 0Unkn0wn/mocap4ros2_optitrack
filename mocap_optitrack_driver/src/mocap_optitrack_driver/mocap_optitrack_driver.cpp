@@ -249,7 +249,7 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
   */
 
   if (mocap_rigid_body_pub_->get_subscription_count() > 0) {
-    geometry_msgs::msg::Pose msg_rb;
+    geometry_msgs::msg::PoseStamped msg_rb;
     msg_rb.header.stamp = now() - frame_delay;
 
     msg_rb.pose.position.x = data->RigidBodies.x;
@@ -259,7 +259,6 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
     msg_rb.pose.orientation.y = data->RigidBodies.qy;
     msg_rb.pose.orientation.z = data->RigidBodies.qz;
     msg_rb.pose.orientation.w = data->RigidBodies.qw;
-    msg_rb.markers = marker2rb[data->RigidBodies.ID];
 
     mocap_rigid_body_pub_->publish(msg_rb);
   }
