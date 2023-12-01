@@ -249,12 +249,9 @@ OptitrackDriverNode::process_frame(sFrameOfMocapData * data)
   */
 
   if (mocap_rigid_body_pub_->get_subscription_count() > 0) {
-    geometry_msgs::msg::TransformStamped msg_rb;
+    geometry_msgs::msg::Pose msg_rb;
     msg_rb.header.stamp = now() - frame_delay;
-    msg_rb.header.frame_id = "map";
-    msg_rb.frame_number = frame_number_;
 
-    msg_rb.rigid_body_name = std::to_string(data->RigidBodies[i].ID);
     msg_rb.pose.position.x = data->RigidBodies.x;
     msg_rb.pose.position.y = data->RigidBodies.y;
     msg_rb.pose.position.z = data->RigidBodies.z;
